@@ -17,6 +17,11 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
+      args:
+        # Optional override. If unset (the common case), the Dockerfile
+        # resolves the version from the copied-in .git via `git describe`,
+        # so the navbar always shows the deployed commit.
+        APP_VERSION: ${APP_VERSION:-}
     restart: unless-stopped
     ports:
       - "80:80"
